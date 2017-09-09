@@ -28,21 +28,13 @@ namespace BLL.Concrete
         }
 
         /// <summary>
-        /// Gets the file size getter.
+        /// Initializes a new instance of the <see cref="FileSizeCollectionGetter"/> class.
         /// </summary>
         /// <owner>Aleksey Beletsky</owner>
-        /// <value>
-        /// The file size getter.
-        /// </value>
-        private IFileSizeCounter FileSizeGetter
+        /// <param name="fileSizeGetter">The file size getter.</param>
+        public FileSizeCollectionGetter(IFileSizeCounter fileSizeGetter)
         {
-            get
-            {
-                if (this.fileSizeGetter == null)
-                    this.fileSizeGetter = new FileSizeGetter();
-
-                return this.fileSizeGetter;
-            }
+            this.fileSizeGetter = fileSizeGetter ?? throw new ArgumentNullException(nameof(fileSizeGetter));
         }
 
         /// <summary>
@@ -59,9 +51,9 @@ namespace BLL.Concrete
 
             long sizeOfFiles;
 
-            sizeOfFiles = this.FileSizeGetter.GetSizes();
+            sizeOfFiles = this.fileSizeGetter.GetSizes();
 
-            this.FileSizeGetter.Dispose();
+            this.fileSizeGetter.Dispose();
 
             return sizeOfFiles;
         }
@@ -87,7 +79,7 @@ namespace BLL.Concrete
         private void ProcessFiles(IEnumerable<string> fileNames)
         {
             foreach (var fileName in fileNames)
-                this.FileSizeGetter.ProcessFile(fileName);
+                this.fileSizeGetter.ProcessFile(fileName);
         }
 
         /// <summary>
