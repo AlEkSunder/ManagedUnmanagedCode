@@ -57,7 +57,13 @@ namespace BLL.Concrete
 
             this.ProcessFiles(fileNames);
 
-            return this.FileSizeGetter.GetSizes();
+            long sizeOfFiles;
+
+            sizeOfFiles = this.FileSizeGetter.GetSizes();
+
+            this.FileSizeGetter.Dispose();
+
+            return sizeOfFiles;
         }
 
         /// <summary>
