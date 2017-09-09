@@ -68,7 +68,7 @@ namespace BLL.Concrete
         /// </returns>
         private bool IsAnyFileInList(IEnumerable<string> fileNames)
         {
-            return fileNames != null || fileNames.Any();
+            return fileNames != null && fileNames.Any();
         }
 
         /// <summary>
