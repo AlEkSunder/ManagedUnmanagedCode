@@ -145,7 +145,7 @@ namespace BLL.Concrete
 
             this.InitializeHandleForCreateFile(fileName);
             long fileSize;
-            FileSizeGetter.GetFileSizeEx(handle, out fileSize);
+            FileSizeGetter.GetFileSizeEx(this.handle, out fileSize);
             this.sizePerFiles.Add(new Tuple<string, long>(fileName, fileSize));
         }
     }
